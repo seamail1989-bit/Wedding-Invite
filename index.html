@@ -570,7 +570,54 @@
   const guestCodeInput = document.getElementById('guest_code');
   if (guestCodeInput && code) guestCodeInput.value = code;
 
-	  // --- ОТКРЫТИЕ КОНВЕРТА ---
+  // --- МУЗЫКА ---
+
+  const bgMusic = document.getElementById('bgMusic');
+  const muteMusicBtn = document.getElementById('muteMusicBtn');
+  let isMusicPlaying = false;
+
+  function updateMusicButton() {
+    if (!muteMusicBtn) return;
+    muteMusicBtn.textContent = isMusicPlaying ? 'Выключить музыку' : 'Включить музыку';
+  }
+
+  function playMusic() {
+    if (!bgMusic) return;
+    bgMusic.volume = 0.7;
+
+    const playPromise = bgMusic.play();
+    if (playPromise && typeof playPromise.then === 'function') {
+      playPromise
+        .then(() => {
+          isMusicPlaying = true;
+          updateMusicButton();
+        })
+        .catch(() => {
+          // браузер мог заблокировать автоплей — тихо игнорируем
+        });
+    } else {
+      isMusicPlaying = true;
+      updateMusicButton();
+    }
+  }
+
+  function stopMusic() {
+    if (!bgMusic) return;
+    bgMusic.pause();
+    bgMusic.currentTime = 0;
+    isMusicPlaying = false;
+    updateMusicButton();
+  }
+
+  muteMusicBtn?.addEventListener('click', () => {
+    if (isMusicPlaying) {
+      stopMusic();
+    } else {
+      playMusic();
+    }
+  });
+
+  // --- ОТКРЫТИЕ КОНВЕРТА ---
 
   const envelopeScreen = document.getElementById('envelopeScreen');
   const inviteMain = document.getElementById('inviteMain');
@@ -578,13 +625,13 @@
 
   function openEnvelope() {
     if (!envelopeScreen || !inviteMain) return;
-    // анимация исчезновения
     envelopeScreen.classList.add('envelope-screen--hidden');
-    // после анимации прячем блок и показываем форму
     setTimeout(() => {
       envelopeScreen.style.display = 'none';
       inviteMain.style.display = 'block';
       window.scrollTo({ top: 0, behavior: 'smooth' });
+      // запуск музыки при открытии приглашения
+      playMusic();
     }, 300);
   }
 
@@ -593,8 +640,10 @@
     openEnvelope();
   });
 
-  // Синхронизируем видимость блока детей при загрузке (если уже выбрано "Да")
+  // --- Инициализация при загрузке ---
+
   syncKidsVisibility();
+  updateMusicButton();
 </script>
 </body>
 </html>
