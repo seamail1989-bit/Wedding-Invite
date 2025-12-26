@@ -129,6 +129,18 @@
       background: linear-gradient(135deg, rgba(255,215,168,.95), rgba(185,167,255,.95));
       color:#111;
     }
+	
+	.music-control{
+      margin-top:10px;
+      display:flex;
+      justify-content:flex-end;
+    }
+    .music-control .ghost{
+      font-size:13px;
+      padding:6px 12px;
+      border-radius:999px;
+    }
+	
     .ghost{
       background:transparent;
       border:1px solid rgba(255,255,255,.18);
@@ -263,6 +275,7 @@
       <div class="hero">
         <!-- тут начинается твой старый .hero-контент -->
         <div class="badge">💌 Приглашение • 03/07/2026</div>
+		<div class="music-control"><button type="button" id="muteMusicBtn" class="ghost">Выключить музыку</button></div>
         <h1>Мы женимся!</h1>
         <p class="sub">
           03/07/2026, Замок Романовски (Langendorf) — Парковая улица, 5, пос. Сокольники,
@@ -429,6 +442,8 @@
     </div>
   </div>
   </div>
+  
+<audio id="bgMusic" src="music.mp3" loop></audio>
 
 <script>
   // --- ДЕТИ: показать/скрыть блок и генерировать поля ---
