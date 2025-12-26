@@ -160,13 +160,15 @@
       margin-bottom:26px;
     }
 
-    .envelope-screen::before{
+.envelope-screen::before{
       content:"";
       position:absolute;
       inset:0;
-      background: url("envelope.jpg") center/cover no-repeat;
+      /* фон — светлый, картинка целиком, без обрезки */
+      background: #f5f5f5 url("envelope.jpg") center/contain no-repeat;
       filter: saturate(1.05);
-      transform: scale(1.02);
+      /* убираем масштаб, чтобы не резать края */
+      transform: none;
     }
 
     .envelope{
