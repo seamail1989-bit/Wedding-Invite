@@ -146,37 +146,142 @@
       line-height:1.6;
       white-space:pre-line;
     }
+	
+	  /* --- Конверт на первом экране --- */
+    .envelope-screen{
+      min-height: calc(100vh - 80px);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .envelope{
+      position:relative;
+      border-radius:28px;
+      border:1px solid var(--stroke);
+      background: radial-gradient(circle at 0 0, rgba(255,215,168,.4), transparent 55%),
+                  radial-gradient(circle at 100% 0, rgba(185,167,255,.4), transparent 55%),
+                  #ffffff;
+      box-shadow: 0 18px 45px rgba(0,0,0,.35);
+      padding:0;
+      width:min(380px, 100%);
+      overflow:hidden;
+      cursor:pointer;
+      display:block;
+      text-align:left;
+      transition:transform .25s ease, box-shadow .25s ease, opacity .25s ease;
+    }
+
+    .envelope:hover{
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: 0 24px 60px rgba(0,0,0,.45);
+    }
+
+    .envelope-top{
+      position:absolute;
+      inset:0;
+      height:55%;
+      background: linear-gradient(145deg, #f5ebe0, #eaded3);
+      clip-path: polygon(0 0, 100% 0, 100% 58%, 50% 100%, 0 58%);
+      opacity:.95;
+      pointer-events:none;
+    }
+
+    .envelope-body{
+      position:relative;
+      padding:80px 26px 26px;
+      background:#fff;
+      color:#1e1e22;
+    }
+
+    .envelope-text{
+      position:relative;
+      z-index:1;
+    }
+
+    .envelope-tag{
+      display:inline-flex;
+      padding:6px 12px;
+      border-radius:999px;
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      border:1px solid rgba(0,0,0,.08);
+      background:rgba(255,255,255,.8);
+      margin-bottom:10px;
+      color:#555;
+    }
+
+    .envelope-title{
+      font-size:22px;
+      font-weight:600;
+      margin-bottom:6px;
+    }
+
+    .envelope-sub{
+      font-size:14px;
+      line-height:1.5;
+      color:#666;
+    }
+
+    .invite-main{
+      margin-top:26px;
+    }
+
+    .envelope-screen--hidden{
+      opacity:0;
+      pointer-events:none;
+      transform: translateY(-12px);
+      transition: opacity .3s ease, transform .3s ease;
+    }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <div class="hero">
-      <div class="badge">💌 Приглашение • 03/07/2026</div>
-      <h1>Мы женимся!</h1>
-      <p class="sub">
-        03/07/2026, Замок Романовски (Langendorf) — Парковая улица, 5, пос. Сокольники,
-        Гвардейский муниципальный округ, Калининградская область
-      </p>
-
-      <div class="grid">
-        <div class="cards">
-          <div class="card">
-            <h3>⏰ Время</h3>
-            <p>14:00 — сбор гостей (лучше не опаздывать, шампанское уже будет!)<br/>15:00 — начало церемонии</p>
-          </div>
-          <div class="card">
-            <h3>🎨 Дресс-код</h3>
-            <p>Будем рады, если вы поддержите палитру торжества.</p>
-            <div class="swatches" aria-label="Дресс-код">
-              <div class="swatch" style="background:#d9c3a5"></div>
-              <div class="swatch" style="background:#5b4b3b"></div>
-            </div>
-          </div>
-          <div class="card">
-            <h3>📝 Ответьте, пожалуйста</h3>
-            <p>Заполните форму ниже — так мы всё правильно спланируем.</p>
+    <!-- Экран с конвертом -->
+    <div id="envelopeScreen" class="envelope-screen">
+      <button id="openEnvelope" class="envelope">
+        <div class="envelope-top"></div>
+        <div class="envelope-body">
+          <div class="envelope-text">
+            <div class="envelope-tag">Приглашение</div>
+            <div class="envelope-title">Открыть конверт</div>
+            <div class="envelope-sub">Нажмите, чтобы увидеть приглашение на свадьбу</div>
           </div>
         </div>
+      </button>
+    </div>
+
+    <!-- Основное содержимое (как было раньше), но внутри блока invite-main -->
+    <div id="inviteMain" class="invite-main" style="display:none;">
+      <div class="hero">
+        <!-- тут начинается твой старый .hero-контент -->
+        <div class="badge">💌 Приглашение • 03/07/2026</div>
+        <h1>Мы женимся!</h1>
+        <p class="sub">
+          03/07/2026, Замок Романовски (Langendorf) — Парковая улица, 5, пос. Сокольники,
+          Гвардейский муниципальный округ, Калининградская область
+        </p>
+
+        <div class="grid">
+          <div class="cards">
+            <div class="card">
+              <h3>⏰ Время</h3>
+              <p>14:00 — сбор гостей (лучше не опаздывать, шампанское уже будет!)<br/>15:00 — начало церемонии</p>
+            </div>
+            <div class="card">
+              <h3>🎨 Дресс-код</h3>
+              <p>Будем рады, если вы поддержите палитру торжества.</p>
+              <div class="swatches" aria-label="Дресс-код">
+                <div class="swatch" style="background:#d9c3a5"></div>
+                <div class="swatch" style="background:#5b4b3b"></div>
+              </div>
+            </div>
+            <div class="card">
+              <h3>📝 Ответьте, пожалуйста</h3>
+              <p>Заполните форму ниже — так мы всё правильно спланируем.</p>
+            </div>
+          </div>
 
         <!-- ВАЖНО: action = твой Apps Script URL -->
         <form method="POST" action="https://script.google.com/macros/s/AKfycbxZVP4LAC2XiACfTVvhtwIciuyEL0qGcQvun0VC1E35VAmcr3IiqloGwztDuwLk-SbM6Q/exec">
@@ -316,6 +421,7 @@
         </form>
       </div>
     </div>
+  </div>
   </div>
 
 <script>
