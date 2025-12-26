@@ -266,19 +266,21 @@
             </div>
           </div>
 
-          <div id="kidsBlock" style="display:none; margin-top:12px;">
-            <div class="row">
-              <div>
-                <label for="kids_count">Количество детей</label>
-                <input id="kids_count" name="kids_count" type="number" min="1" step="1" placeholder="1" />
-              </div>
-              <div>
-                <label for="kids_details">Дети (ФИО и возраст)</label>
-                <input id="kids_details" name="kids_details" type="text" placeholder="Маша Иванова, 6; Петя Иванов, 4" />
-              </div>
-            </div>
-            <div class="hint">Можно будет сделать отдельные поля на каждого ребёнка — если захочешь.</div>
-          </div>
+			<div id="kidsBlock" style="display:none; margin-top:12px;">
+			<div class="row">
+				<div>
+				<label for="kids_count">Количество детей</label>
+				<input id="kids_count" name="kids_count" type="number" min="1" step="1" placeholder="1" />
+				<div class="hint">После ввода количества появятся отдельные поля для каждого ребёнка.</div>
+				</div>
+			</div>
+			
+			<!-- сюда будем динамически добавлять поля для детей -->
+			<div id="kidsList" style="margin-top:12px;"></div>
+			
+			<!-- сюда перед отправкой формы соберём всех детей строкой, чтобы в таблицу летело как раньше -->
+			<input id="kids_details" name="kids_details" type="hidden" value="" />
+			</div>
 
           <div class="divider"></div>
 
@@ -313,48 +315,133 @@
     </div>
   </div>
 
-  <script>
-    const kidsYes = document.getElementById('kidsYes');
-    const kidsNo = document.getElementById('kidsNo');
-    const kidsBlock = document.getElementById('kidsBlock');
+<script>
+  // --- ДЕТИ: показать/скрыть блок и генерировать поля ---
 
-    function syncKids() {
-      const show = kidsYes && kidsYes.checked;
-      kidsBlock.style.display = show ? 'block' : 'none';
+  const kidsYes = document.getElementById('kidsYes');
+  const kidsNo = document.getElementById('kidsNo');
+  const kidsBlock = document.getElementById('kidsBlock');
+  const kidsCountInput = document.getElementById('kids_count');
+  const kidsList = document.getElementById('kidsList');
+  const kidsDetailsHidden = document.getElementById('kids_details');
+
+  function clearKids() {
+    if (kidsList) kidsList.innerHTML = "";
+    if (kidsDetailsHidden) kidsDetailsHidden.value = "";
+    if (kidsCountInput) kidsCountInput.value = "";
+  }
+
+  function syncKidsVisibility() {
+    const show = kidsYes && kidsYes.checked;
+    if (kidsBlock) kidsBlock.style.display = show ? 'block' : 'none';
+    if (!show) clearKids();
+  }
+
+  kidsYes?.addEventListener('change', syncKidsVisibility);
+  kidsNo?.addEventListener('change', syncKidsVisibility);
+
+  function rebuildKidsInputs() {
+    if (!kidsList) return;
+    kidsList.innerHTML = "";
+
+    const n = parseInt(kidsCountInput.value, 10);
+    if (!n || n <= 0) return;
+
+    for (let i = 1; i <= n; i++) {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'row';
+      wrapper.style.marginTop = i === 1 ? '0' : '10px';
+
+      const col1 = document.createElement('div');
+      const col2 = document.createElement('div');
+
+      const labelName = document.createElement('label');
+      labelName.textContent = `Ребёнок ${i} — ФИО`;
+      const inputName = document.createElement('input');
+      inputName.type = 'text';
+      inputName.name = `kid_name_${i}`;
+      inputName.placeholder = 'Фамилия Имя';
+
+      const labelAge = document.createElement('label');
+      labelAge.textContent = `Ребёнок ${i} — возраст`;
+      const inputAge = document.createElement('input');
+      inputAge.type = 'text';
+      inputAge.name = `kid_age_${i}`;
+      inputAge.placeholder = 'Возраст';
+
+      col1.appendChild(labelName);
+      col1.appendChild(inputName);
+
+      col2.appendChild(labelAge);
+      col2.appendChild(inputAge);
+
+      wrapper.appendChild(col1);
+      wrapper.appendChild(col2);
+
+      kidsList.appendChild(wrapper);
     }
+  }
 
-    kidsYes?.addEventListener('change', syncKids);
-    kidsNo?.addEventListener('change', syncKids);
-	const plusOnes = document.getElementById('plusOnes');
-	const addGuestBtn = document.getElementById('addGuestBtn');
-	const removeGuestBtn = document.getElementById('removeGuestBtn');
-	
-	function countGuestInputs() {
-		return plusOnes ? plusOnes.querySelectorAll('input[name^="fio_plus"]').length : 0;
-	}
-	
-	addGuestBtn?.addEventListener('click', () => {
-		const n = countGuestInputs() + 1; // следующий номер
-		const input = document.createElement('input');
-		input.name = `fio_plus${n}`;
-		input.type = 'text';
-		input.placeholder = `Гость ${n + 1} — ФИО`;
-		input.style.marginTop = '10px';
-		plusOnes.appendChild(input);
-	});
-	
-	removeGuestBtn?.addEventListener('click', () => {
-		const inputs = plusOnes?.querySelectorAll('input[name^="fio_plus"]');
-		if (!inputs || inputs.length <= 1) return;
-		inputs[inputs.length - 1].remove();
-	});
-	
-		// Подхватываем ?code=... из ссылки и пишем в hidden поле guest_code
-	const params = new URLSearchParams(window.location.search);
-	const code = params.get('code');
-	const guestCodeInput = document.getElementById('guest_code');
-	if (guestCodeInput && code) guestCodeInput.value = code;
+  kidsCountInput?.addEventListener('input', rebuildKidsInputs);
+  kidsCountInput?.addEventListener('change', rebuildKidsInputs);
 
-  </script>
+  // --- ПЛЮС-ГОСТИ ---
+
+  const plusOnes = document.getElementById('plusOnes');
+  const addGuestBtn = document.getElementById('addGuestBtn');
+  const removeGuestBtn = document.getElementById('removeGuestBtn');
+
+  function countGuestInputs() {
+    return plusOnes ? plusOnes.querySelectorAll('input[name^="fio_plus"]').length : 0;
+  }
+
+  addGuestBtn?.addEventListener('click', () => {
+    const n = countGuestInputs() + 1;
+    const input = document.createElement('input');
+    input.name = `fio_plus${n}`;
+    input.type = 'text';
+    input.placeholder = `Гость ${n + 1} — ФИО`;
+    input.style.marginTop = '10px';
+    plusOnes.appendChild(input);
+  });
+
+  removeGuestBtn?.addEventListener('click', () => {
+    const inputs = plusOnes?.querySelectorAll('input[name^="fio_plus"]');
+    if (!inputs || inputs.length <= 1) return;
+    inputs[inputs.length - 1].remove();
+  });
+
+  // --- Перед отправкой формы собираем детей в hidden kids_details ---
+
+  const form = document.querySelector('form');
+
+  form?.addEventListener('submit', () => {
+    if (!kidsDetailsHidden || !kidsList) return;
+    const rows = kidsList.querySelectorAll('.row');
+    const parts = [];
+
+    rows.forEach((row, index) => {
+      const nameInput = row.querySelector(`input[name="kid_name_${index + 1}"]`);
+      const ageInput = row.querySelector(`input[name="kid_age_${index + 1}"]`);
+      const name = nameInput?.value.trim();
+      const age = ageInput?.value.trim();
+      if (name) {
+        parts.push(age ? `${name}, ${age}` : name);
+      }
+    });
+
+    kidsDetailsHidden.value = parts.join('; ');
+  });
+
+  // --- guest_code из ?code=... ---
+
+  const params = new URLSearchParams(window.location.search);
+  const code = params.get('code');
+  const guestCodeInput = document.getElementById('guest_code');
+  if (guestCodeInput && code) guestCodeInput.value = code;
+
+  // Синхронизируем видимость блока детей при загрузке (если уже выбрано "Да")
+  syncKidsVisibility();
+</script>
 </body>
 </html>
