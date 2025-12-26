@@ -151,7 +151,7 @@
 	.envelope-screen{
       width:100%;
       max-width:900px;
-      aspect-ratio: 16 / 9;
+      aspect-ratio: 3 / 4;
       border-radius: var(--radius);
       overflow:hidden;
       position:relative;
@@ -554,6 +554,29 @@
   const code = params.get('code');
   const guestCodeInput = document.getElementById('guest_code');
   if (guestCodeInput && code) guestCodeInput.value = code;
+
+	  // --- ОТКРЫТИЕ КОНВЕРТА ---
+
+  const envelopeScreen = document.getElementById('envelopeScreen');
+  const inviteMain = document.getElementById('inviteMain');
+  const openEnvelopeBtn = document.getElementById('openEnvelope');
+
+  function openEnvelope() {
+    if (!envelopeScreen || !inviteMain) return;
+    // анимация исчезновения
+    envelopeScreen.classList.add('envelope-screen--hidden');
+    // после анимации прячем блок и показываем форму
+    setTimeout(() => {
+      envelopeScreen.style.display = 'none';
+      inviteMain.style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 300);
+  }
+
+  openEnvelopeBtn?.addEventListener('click', (e) => {
+    e.preventDefault();
+    openEnvelope();
+  });
 
   // Синхронизируем видимость блока детей при загрузке (если уже выбрано "Да")
   syncKidsVisibility();
