@@ -148,8 +148,10 @@
     }
 	
    /* --- Конверт на первом экране (фон-фото) --- */
-    .envelope-screen{
-      min-height: calc(100vh - 80px);
+	.envelope-screen{
+      width:100%;
+      max-width:800px;
+      aspect-ratio: 3 / 4; /* ширина : высота → прямоугольник выше, чем шире */
       border-radius: var(--radius);
       overflow:hidden;
       position:relative;
@@ -157,18 +159,16 @@
       align-items:center;
       justify-content:center;
       box-shadow: 0 18px 45px rgba(0,0,0,.45);
-      margin-bottom:26px;
-    }
+      margin:0 auto 26px;
+	}
 
-.envelope-screen::before{
+	.envelope-screen::before{
       content:"";
       position:absolute;
       inset:0;
-      /* фон — светлый, картинка целиком, без обрезки */
-      background: #f5f5f5 url("envelope.jpg") center/contain no-repeat;
+      background: url("envelope.jpg") center/cover no-repeat;
       filter: saturate(1.05);
-      /* убираем масштаб, чтобы не резать края */
-      transform: none;
+      transform: scale(1.02);
     }
 
     .envelope{
