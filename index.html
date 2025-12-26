@@ -147,81 +147,86 @@
       white-space:pre-line;
     }
 	
-	  /* --- Конверт на первом экране --- */
+   /* --- Конверт на первом экране (фон-фото) --- */
     .envelope-screen{
       min-height: calc(100vh - 80px);
+      border-radius: var(--radius);
+      overflow:hidden;
+      position:relative;
       display:flex;
       align-items:center;
       justify-content:center;
+      box-shadow: 0 18px 45px rgba(0,0,0,.45);
+      margin-bottom:26px;
+    }
+
+    .envelope-screen::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: url("envelope.jpg") center/cover no-repeat;
+      filter: saturate(1.05);
+      transform: scale(1.02);
     }
 
     .envelope{
       position:relative;
-      border-radius:28px;
-      border:1px solid var(--stroke);
-      background: radial-gradient(circle at 0 0, rgba(255,215,168,.4), transparent 55%),
-                  radial-gradient(circle at 100% 0, rgba(185,167,255,.4), transparent 55%),
-                  #ffffff;
-      box-shadow: 0 18px 45px rgba(0,0,0,.35);
-      padding:0;
-      width:min(380px, 100%);
-      overflow:hidden;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.6);
+      background: radial-gradient(circle at 0 0, rgba(255,255,255,.35), transparent 60%),
+                  rgba(0,0,0,.55);
+      padding:14px 26px;
       cursor:pointer;
-      display:block;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      color:#fff;
+      backdrop-filter: blur(10px);
       text-align:left;
-      transition:transform .25s ease, box-shadow .25s ease, opacity .25s ease;
+      transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
     }
 
     .envelope:hover{
-      transform: translateY(-4px) scale(1.01);
-      box-shadow: 0 24px 60px rgba(0,0,0,.45);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(0,0,0,.6);
+      background: radial-gradient(circle at 0 0, rgba(255,255,255,.45), transparent 60%),
+                  rgba(0,0,0,.7);
     }
 
-    .envelope-top{
-      position:absolute;
-      inset:0;
-      height:55%;
-      background: linear-gradient(145deg, #f5ebe0, #eaded3);
-      clip-path: polygon(0 0, 100% 0, 100% 58%, 50% 100%, 0 58%);
-      opacity:.95;
-      pointer-events:none;
-    }
+    .envelope-top{ display:none; }
 
     .envelope-body{
       position:relative;
-      padding:80px 26px 26px;
-      background:#fff;
-      color:#1e1e22;
+      padding:0;
+      background:transparent;
+      color:inherit;
     }
 
-    .envelope-text{
-      position:relative;
-      z-index:1;
-    }
+    .envelope-text{ position:relative; z-index:1; }
 
     .envelope-tag{
       display:inline-flex;
-      padding:6px 12px;
+      padding:4px 10px;
       border-radius:999px;
-      font-size:12px;
+      font-size:11px;
       text-transform:uppercase;
-      letter-spacing:.12em;
-      border:1px solid rgba(0,0,0,.08);
-      background:rgba(255,255,255,.8);
-      margin-bottom:10px;
-      color:#555;
+      letter-spacing:.14em;
+      border:1px solid rgba(255,255,255,.6);
+      background:rgba(0,0,0,.4);
+      margin-bottom:4px;
+      color:#f5f5f5;
     }
 
     .envelope-title{
-      font-size:22px;
+      font-size:18px;
       font-weight:600;
-      margin-bottom:6px;
+      margin-bottom:2px;
     }
 
     .envelope-sub{
-      font-size:14px;
-      line-height:1.5;
-      color:#666;
+      font-size:13px;
+      line-height:1.4;
+      color:rgba(245,245,245,.86);
     }
 
     .invite-main{
