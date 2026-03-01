@@ -20,10 +20,14 @@
 	body{
 	margin:0;
 	font-family: 'Montserrat', sans-serif;
+	background:#000;
+	color:#fff;
+	transition: background .8s ease, color .8s ease;
+	}
+	body.invite-open{
 	background: linear-gradient(180deg, #fff6f8 0%, #fdecef 100%);
 	color:#3a3a3a;
 	}
-
     .wrap{max-width:980px; margin:0 auto; padding:28px 18px 70px;}
     .hero{
       padding:26px;
@@ -627,7 +631,10 @@
 
 	function openEnvelope() {
 	if (!envelopeScreen || !inviteMain) return;
+	
 	envelopeScreen.classList.add('envelope-screen--hidden');
+	document.body.classList.add('invite-open');
+	
 	setTimeout(() => {
 		envelopeScreen.style.display = 'none';
 		inviteMain.style.display = 'block';
