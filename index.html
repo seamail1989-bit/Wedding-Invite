@@ -179,13 +179,18 @@
       transition: opacity .7s ease, transform .7s ease;
 	}
 
-	.envelope-screen::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background: url("envelope.jpg") center/50% auto no-repeat; /* Уменьшаем масштаб картинки до 50% */
-      filter: saturate(1.05);
-    }
+	.envelope-screen::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      /* Возвращаем cover, но управляем размером через scale */
+      background: url("envelope.jpg") center center no-repeat;
+      background-size: cover; 
+      filter: saturate(1.05);
+      /* Уменьшаем масштаб всего слоя с картинкой. 0.8 = 80% от оригинала */
+      transform: scale(0.8); 
+      z-index: 0;
+    }
 
     .envelope{
       position:relative;
