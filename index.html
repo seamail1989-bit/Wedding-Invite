@@ -163,35 +163,33 @@
     }
 	
    /* --- Конверт на первом экране (фон-фото) --- */
-	/* --- Конверт на первом экране (фон-фото) --- */
-	.envelope-screen {
-	width: 90%;          /* Сделаем рамку чуть шире, чтобы влезло больше деталей */
-	max-width: 900px;
-	/* МЫ ИЗМЕНЯЕМ ПРОПОРЦИИ:
-		Вместо 1 / 1.4 (приземистая) мы делаем 1 / 1.5.
-		Блок становится чуть выше, чтобы вместить отдаленное изображение,
-		не обрезая бока. */
-	aspect-ratio: 1 / 1.5;
-	border-radius: var(--radius);
-	overflow: hidden;
-	position: relative;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	box-shadow: 0 18px 45px rgba(0,0,0,.45);
-	margin: 0 auto 26px;
-	transition: opacity .7s ease, transform .7s ease;
-	}
+.envelope-screen {
+  width: 90%;
+  max-width: 900px;
+  /* Возвращаем пропорции, которые были "почти идеальными" */
+  aspect-ratio: 1 / 1.4; 
+  border-radius: var(--radius);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 18px 45px rgba(0,0,0,.45);
+  margin: 0 auto 26px;
+  transition: opacity .7s ease, transform .7s ease;
+}
 	
 	.envelope-screen::before {
   content: "";
   position: absolute;
   inset: 0;
-  /* КЛЮЧЕВОЕ ИЗМЕНЕНИЕ: background-size: 90% (вместо cover)
-     Это отдаляет изображение, а center удерживает его в фокусе. */
-  background: url("envelope.jpg") center/90% no-repeat;
+  /* Используем cover, чтобы картинка обрезалась и заполняла блок */
+  background: url("envelope.jpg") center/cover no-repeat;
   filter: saturate(1.05);
-  /* Transform: scale убираем, так как теперь кадрирование идет через отдаление фона */
+  /* ОТДАЛЕНИЕ: scale(0.9) уменьшает картинку внутри блока на 10%.
+     Так как у нас стоит cover, она все равно заполнит края, 
+     но объекты (кольца, цветы) станут чуть меньше и "дальше". */
+  transform: scale(0.9);
 }
 
     .envelope{
