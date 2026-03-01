@@ -163,15 +163,15 @@
     }
 	
    /* --- Конверт на первом экране (фон-фото) --- */
+	/* --- Конверт на первом экране (фон-фото) --- */
 	.envelope-screen {
 	width: 90%;          /* Сделаем рамку чуть шире, чтобы влезло больше деталей */
 	max-width: 900px;
 	/* МЫ ИЗМЕНЯЕМ ПРОПОРЦИИ:
-		Вместо 1 / 1.9 (очень высокая) мы делаем 1 / 1.4.
-		Блок становится более "квадратным" и приземистым,
-		из-за чего cover больше не будет обрезать бока.
-		Он обрежет только лишний "пол" и "потолок". */
-	aspect-ratio: 1 / 1.4;
+		Вместо 1 / 1.4 (приземистая) мы делаем 1 / 1.5.
+		Блок становится чуть выше, чтобы вместить отдаленное изображение,
+		не обрезая бока. */
+	aspect-ratio: 1 / 1.5;
 	border-radius: var(--radius);
 	overflow: hidden;
 	position: relative;
@@ -184,13 +184,15 @@
 	}
 	
 	.envelope-screen::before {
-	content: "";
-	position: absolute;
-	inset: 0;
-	background: url("envelope.jpg") center/cover no-repeat;
-	filter: saturate(1.05);
-	/* Transform: scale убираем, так как теперь кадрирование идет через aspect-ratio контейнера */
-	}
+  content: "";
+  position: absolute;
+  inset: 0;
+  /* КЛЮЧЕВОЕ ИЗМЕНЕНИЕ: background-size: 90% (вместо cover)
+     Это отдаляет изображение, а center удерживает его в фокусе. */
+  background: url("envelope.jpg") center/90% no-repeat;
+  filter: saturate(1.05);
+  /* Transform: scale убираем, так как теперь кадрирование идет через отдаление фона */
+}
 
     .envelope{
       position:relative;
