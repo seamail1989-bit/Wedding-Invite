@@ -180,13 +180,12 @@
 	}
 
 	.envelope-screen::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background: url("envelope.jpg") center/cover no-repeat;
-      filter: saturate(1.05);
-      transform: scale(0.8);
-    }
+      content:"";
+      position:absolute;
+      inset:0;
+      background: url("envelope.jpg") center/contain no-repeat; /* Показываем картинку целиком */
+      filter: saturate(1.05);
+    }
 
     .envelope{
       position:relative;
