@@ -163,30 +163,33 @@
     }
 	
    /* --- Конверт на первом экране (фон-фото) --- */
-	.envelope-screen{
-      width:80%;
-      max-width:900px;
-      aspect-ratio: 1 / 1.90;
-      border-radius: var(--radius);
-      overflow:hidden;
-      position:relative;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      box-shadow: 0 18px 45px rgba(0,0,0,.45);
-      margin:0 auto 26px;
-	        /* добавляем плавную анимацию для изменения прозрачности и позиции */
-      transition: opacity .7s ease, transform .7s ease;
+	.envelope-screen {
+	width: 80%;
+	max-width: 900px;
+	/* Мы немного увеличим aspect-ratio, чтобы блок был чуть шире,
+		это поможет вписать квадратный или широкий конверт */
+	aspect-ratio: 1 / 1.5; /* Было 1.9, стало 1.5 - блок стал чуть ниже и шире */
+	border-radius: var(--radius);
+	overflow: hidden;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0 18px 45px rgba(0,0,0,.45);
+	margin: 0 auto 26px;
+	/* Плавная анимация */
+	transition: opacity .7s ease, transform .7s ease;
 	}
-
-	.envelope-screen::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background: url("envelope.jpg") center/cover no-repeat;
-      filter: saturate(1.05);
-      transform: scale(1.02);
-    }
+	
+	.envelope-screen::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: url("envelope.jpg") center/contain no-repeat; /* КЛЮЧЕВОЕ ИЗМЕНЕНИЕ: cover заменен на contain */
+	filter: saturate(1.05);
+	/* Удаляем transform: scale, так как он может мешать точному вписыванию */
+	/* background-color: #fdf2e9; */ /* ОПЦИОНАЛЬНО: можно добавить цвет фона, если появятся полосы */
+	}
 
     .envelope{
       position:relative;
