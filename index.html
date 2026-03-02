@@ -155,11 +155,19 @@
       border-radius:999px;
     }
 	
-    .ghost{
-      background:transparent;
-      border:1px solid rgba(255,204,229,.18);
-      color:var(--text);
-      font-weight:600;
+    .invite-main .ghost {
+      background: rgba(0, 0, 0, 0.05); /* Легкий серый фон */
+      border: 1px solid #888888;       /* Заметная серая рамка */
+      color: #333333;                 /* Темный текст */
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 999px;           /* Округлая форма (pill-shape) */
+      transition: all 0.2s ease;
+    }
+
+    .invite-main .ghost:hover {
+      background: rgba(0, 0, 0, 0.1);  /* Чуть темнее при наведении */
+      border-color: #333333;
     }
 
     .note{
