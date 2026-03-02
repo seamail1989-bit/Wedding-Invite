@@ -344,10 +344,22 @@
 	color: #111111;           /* Глубокий почти черный цвет */
 	}
 	/* Делаем текст в карточках чуть выразительнее */
-	.invite-main .card {
-	background: rgba(0, 0, 0, 0.04); /* Легкая подложка вместо черной */
-	border: 1px solid rgba(0, 0, 0, 0.08);
-	}
+	/* Принудительно красим карточку Дресс-кода в цвет фона твоей картинки */
+    .invite-main .card:has(.dresscode-img) {
+      background-color: rgb(248, 248, 248) !important;
+      background-image: none !important; /* Убираем градиенты, если они были */
+      border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    }
+
+    /* Убедимся, что картинка не имеет лишних теней или фильтров */
+    .dresscode-img {
+      width: 70%;
+      height: auto;
+      display: block;
+      margin: 20px auto 10px auto;
+      border-radius: 4px;
+      mix-blend-mode: normal; /* Обычный режим отображения */
+    }
     .envelope-screen--hidden{
       opacity:0;
       pointer-events:none;
@@ -366,22 +378,7 @@
   /* Совсем легкое скругление углов самой картинки */
   border-radius: 4px; 
   
-  /* Принудительно красим карточку Дресс-кода в цвет фона твоей картинки */
-    .invite-main .card:has(.dresscode-img) {
-      background-color: rgb(248, 248, 248) !important;
-      background-image: none !important; /* Убираем градиенты, если они были */
-      border: 1px solid rgba(0, 0, 0, 0.1) !important;
-    }
-
-    /* Убедимся, что картинка не имеет лишних теней или фильтров */
-    .dresscode-img {
-      width: 70%;
-      height: auto;
-      display: block;
-      margin: 20px auto 10px auto;
-      border-radius: 4px;
-      mix-blend-mode: normal; /* Обычный режим отображения */
-    }
+  
 }
   </style>
 </head>
