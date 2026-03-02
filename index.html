@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Приглашение на свадьбу</title>
@@ -264,14 +264,15 @@
 	}
 	
 	/* Стилизуем заголовки внутри формы, чтобы они выглядели по-свадебному */
-	.invite-main h1, 
-	.invite-main h2, 
-	.invite-main h3,
-	.sectionTitle h2 {
-	font-family: 'Playfair Display', serif;
-	color: #1a1a1a; /* Еще чуть темнее для акцента */
-	font-weight: 700;
-	letter-spacing: 0; /* Для антиквы не нужно сильное сжатие */
+.invite-main h1, 
+.invite-main h2, 
+.invite-main h3, 
+.sectionTitle h2 {
+  font-family: 'Cormorant Garamond', serif; /* Новый изящный шрифт */
+  text-transform: uppercase;                /* Сделаем заглавными для статусности */
+  letter-spacing: 0.1em;                    /* Добавим «воздуха» между буквами */
+  color: #1a1a1a;
+  font-weight: 600;
 	}
 	
 	/* Исправляем цвет подписей и пояснений, которые были слишком светлыми */
@@ -283,7 +284,12 @@
 	.invite-main .note {
 	color: #4a4a4a !important; /* Насыщенный серый, который легко читать */
 	}
-	
+
+	.invite-main h1 {
+	font-size: 52px;
+	line-height: 1.1;
+	margin-bottom: 20px;
+	}
 	/* Делаем текст в карточках чуть выразительнее */
 	.invite-main .card {
 	background: rgba(0, 0, 0, 0.04); /* Легкая подложка вместо черной */
