@@ -208,34 +208,34 @@
     }
 	
    /* --- Конверт на первом экране (фон-фото) --- */
-.envelope-screen {
-  width: 90%;          /* Сделаем рамку чуть шире, чтобы влезло больше деталей */
-  max-width: 900px;
-  /* МЫ ИЗМЕНЯЕМ ПРОПОРЦИИ:
-     Вместо 1 / 1.9 (очень высокая) мы делаем 1 / 1.4.
-     Блок становится более "квадратным" и приземистым,
-     из-за чего cover больше не будет обрезать бока.
-     Он обрежет только лишний "пол" и "потолок". */
-  aspect-ratio: 1 / 1.8;
-  border-radius: var(--radius);
-  overflow: hidden;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 18px 45px rgba(0,0,0,.45);
-  margin: 0 auto 26px;
-  transition: opacity 2.1s ease, transform 2.1s ease;
-}
+	.envelope-screen {
+	width: 90%;          /* Сделаем рамку чуть шире, чтобы влезло больше деталей */
+	max-width: 900px;
+	/* МЫ ИЗМЕНЯЕМ ПРОПОРЦИИ:
+		Вместо 1 / 1.9 (очень высокая) мы делаем 1 / 1.4.
+		Блок становится более "квадратным" и приземистым,
+		из-за чего cover больше не будет обрезать бока.
+		Он обрежет только лишний "пол" и "потолок". */
+	aspect-ratio: 1 / 1.8;
+	border-radius: var(--radius);
+	overflow: hidden;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0 18px 45px rgba(0,0,0,.45);
+	margin: 0 auto 26px;
+	transition: opacity 2.1s ease, transform 2.1s ease;
+	}
 	
 	.envelope-screen::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: url("envelope.jpg") center/cover no-repeat;
-  filter: saturate(1.05);
-  /* Transform: scale убираем, так как теперь кадрирование идет через aspect-ratio контейнера */
-}
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: url("envelope.jpg") center/cover no-repeat;
+	filter: saturate(1.05);
+	/* Transform: scale убираем, так как теперь кадрирование идет через aspect-ratio контейнера */
+	}
 
     .envelope{
       position:relative;
@@ -311,15 +311,15 @@
 	}
 	
 	/* Стилизуем заголовки внутри формы, чтобы они выглядели по-свадебному */
-.invite-main h1, 
-.invite-main h2, 
-.invite-main h3, 
-.sectionTitle h2 {
-  font-family: 'Cormorant Garamond', serif; /* Новый изящный шрифт */
-  text-transform: uppercase;                /* Сделаем заглавными для статусности */
-  letter-spacing: 0.1em;                    /* Добавим «воздуха» между буквами */
-  color: #1a1a1a;
-  font-weight: 600;
+	.invite-main h1, 
+	.invite-main h2, 
+	.invite-main h3, 
+	.sectionTitle h2 {
+	font-family: 'Cormorant Garamond', serif; /* Новый изящный шрифт */
+	text-transform: uppercase;                /* Сделаем заглавными для статусности */
+	letter-spacing: 0.1em;                    /* Добавим «воздуха» между буквами */
+	color: #1a1a1a;
+	font-weight: 600;
 	}
 	
 	/* Исправляем цвет подписей и пояснений, которые были слишком светлыми */
@@ -333,16 +333,16 @@
 	}
 
 	.invite-main h1 {
-  font-family: 'Playfair Display', serif; /* Переключаем на более мощный шрифт */
-  font-size: 64px;          /* Увеличиваем размер */
-  font-style: italic;       /* Оставляем элегантный курсив */
-  font-weight: 400;         /* Экстремальная жирность (Black) */
-  letter-spacing: -0.02em;  /* Сближаем буквы для плотности */
-  text-transform: none;
-  line-height: 1.0;
-  margin-bottom: 24px;
-  color: #111111;           /* Глубокий почти черный цвет */
-}
+	font-family: 'Playfair Display', serif; /* Переключаем на более мощный шрифт */
+	font-size: 64px;          /* Увеличиваем размер */
+	font-style: italic;       /* Оставляем элегантный курсив */
+	font-weight: 400;         /* Экстремальная жирность (Black) */
+	letter-spacing: -0.02em;  /* Сближаем буквы для плотности */
+	text-transform: none;
+	line-height: 1.0;
+	margin-bottom: 24px;
+	color: #111111;           /* Глубокий почти черный цвет */
+	}
 	/* Делаем текст в карточках чуть выразительнее */
 	.invite-main .card {
 	background: rgba(0, 0, 0, 0.04); /* Легкая подложка вместо черной */
@@ -353,6 +353,14 @@
       pointer-events:none;
       transform: translateY(-20px);
     }
+	
+	.dresscode-img {
+	width: 100%;             /* Растягиваем на всю ширину карточки */
+	height: auto;            /* Сохраняем пропорции кругов */
+	display: block;
+	margin-top: 15px;        /* Отступ сверху от текста */
+	border-radius: 4px;      /* Совсем легкое скругление углов самой картинки */
+	}
   </style>
 </head>
 <body>
@@ -391,10 +399,7 @@
             <div class="card">
               <h3>🎨 Дресс-код</h3>
               <p>Будем рады, если вы поддержите палитру торжества.</p>
-              <div class="swatches" aria-label="Дресс-код">
-                <div class="swatch" style="background:#d9c3a5"></div>
-                <div class="swatch" style="background:#5b4b3b"></div>
-              </div>
+              <img src="photo_2026-01-04_13-40-31.jpg" class="dresscode-img" alt="Палитра дресс-кода">
             </div>
             <div class="card">
               <h3>📝 Ответьте, пожалуйста</h3>
