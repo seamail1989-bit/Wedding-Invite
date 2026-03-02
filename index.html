@@ -635,18 +635,29 @@
   const inviteMain = document.getElementById('inviteMain');
   const openEnvelopeBtn = document.getElementById('openEnvelope');
 
-	function openEnvelope() {
-	if (!envelopeScreen || !inviteMain) return;
-	
-	envelopeScreen.classList.add('envelope-screen--hidden');
+function openEnvelope() {
+  if (!envelopeScreen || !inviteMain) return;
+  
+  // 1. Запускаем исчезновение конверта
+  envelopeScreen.classList.add('envelope-screen--hidden');
 
-	setTimeout(() => {
-		envelopeScreen.style.display = 'none';
-		inviteMain.style.display = 'block';
-		window.scrollTo({ top: 0, behavior: 'smooth' });
-		playMusic();
-	}, 2100); // под твои 2.1s
-	}
+  // 2. Ждем, пока конверт полностью исчезнет (2.1 секунды)
+  setTimeout(() => {
+    envelopeScreen.style.display = 'none';
+    
+    // 3. Подготавливаем форму: делаем её существующей в дереве документа, но пока прозрачной
+    inviteMain.style.display = 'block';
+    
+    // 4. Небольшая задержка (микро-тик), чтобы браузер успел применить display:block
+    // и увидел переход от opacity 0 к 1
+    setTimeout(() => {
+      inviteMain.style.opacity = '1';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      playMusic();
+    }, 50); 
+    
+  }, 2100); 
+}
 
   openEnvelopeBtn?.addEventListener('click', (e) => {
     e.preventDefault();
