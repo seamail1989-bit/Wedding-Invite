@@ -421,7 +421,7 @@
               <img src="dresscode_palette.jpg" class="dresscode-img" alt="Палитра дресс-кода">
             </div>
             <div class="card">
-              <h3>📝 Ответьте, пожалуйста</h3>
+              <h3>📝</h3>
               <p>Заполните форму ниже — так мы всё правильно спланируем.</p>
             </div>
           </div>
@@ -468,7 +468,7 @@
 
 
             <div>
-              <label>Что пьёте?</label>
+              <label>Предпочтения по напиткам</label>
               <div class="checks">
                 <label class="check"><input type="checkbox" name="drink_vodka" value="on"> Водка</label>
                 <label class="check"><input type="checkbox" name="drink_rum" value="on"> Ром</label>
@@ -481,7 +481,7 @@
 
           <div class="row">
             <div>
-              <label>Нужен ли трансфер туда?</label>
+              <label>Нужен ли трансфер на место проведения мероприятия?</label>
               <div class="checks">
                 <label class="check"><input type="radio" name="transfer_to" value="Да"> Да</label>
                 <label class="check"><input type="radio" name="transfer_to" value="Нет"> Нет</label>
@@ -489,7 +489,7 @@
             </div>
 
             <div>
-              <label>Нужен ли обратный трансфер?</label>
+              <label>Нужен ли Вам трансфер обратно с места мероприятия?</label>
               <div class="checks">
                 <label class="check"><input type="radio" name="transfer_back" value="Да"> Да</label>
                 <label class="check"><input type="radio" name="transfer_back" value="Нет"> Нет</label>
@@ -537,7 +537,7 @@
 
           <div class="row">
             <div>
-              <label for="allergy">Аллергия на что-либо</label>
+              <label for="allergy">Есть ли у Вас аллергия на какие-либо ингридиенты, просим сообщить об этом</label>
               <input id="allergy" name="allergy" type="text" placeholder="Если есть — напишите" />
             </div>
 		  <input id="guest_code" name="guest_code" type="hidden" value="" />
@@ -555,11 +555,11 @@
 
           <div class="note">
 Дорогие наши,
-Мы очень ценим ваше внимание и заботу.
+Мы очень ценим Ваше внимание и заботу.
 И хотели бы попросить, не дарить нам цветы — они прекрасны, возможно очень украсят торжество, но они так быстро увядают.
-Нам бы хотелось, чтобы память о вашем участии в нашем празднике оставалась с нами дольше.
+Нам бы хотелось, чтобы память о Вашем участии в нашем празднике оставалась с нами дольше.
 Поэтому у нас возникла прекрасная идея - если вы замените букет, на бутылочку своего любимого алкогольного напитка и подарите нам. Обязательно подпишите ее!
-И когда в будущем, воскресным вечером, мы будем открывать ее, мы с теплом вспомним этот день и каждого из вас.
+И когда в будущем, воскресным вечером, мы будем открывать ее, мы с теплом вспомним этот день и каждого из Вас.
           </div>
         </form>
       </div>
@@ -610,7 +610,7 @@
       const col2 = document.createElement('div');
 
       const labelName = document.createElement('label');
-      labelName.textContent = `Ребёнок ${i} — ФИО`;
+      labelName.textContent = `Ребёнок ${i} — ФИ`;
       const inputName = document.createElement('input');
       inputName.type = 'text';
       inputName.name = `kid_name_${i}`;
