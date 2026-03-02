@@ -64,7 +64,20 @@
 	}
 	
     h1{margin:14px 0 8px; font-size:44px; letter-spacing:-.02em}
-    .sub{margin:0; color:var(--muted); font-size:16px; line-height:1.55}
+    .invite-main .sub {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;          /* Чуть увеличим для читаемости */
+  line-height: 1.6;         /* Добавим расстояние между строками */
+  color: #444444;           /* Сделаем цвет более глубоким и четким */
+  margin-top: 10px;
+  text-align: center;       /* Центрируем текст, если нужно */
+}
+
+.invite-main .sub b {
+  color: #1a1a1a;           /* Сделаем жирный текст еще темнее для акцента */
+  display: inline-block;
+  margin: 5px 0;            /* Небольшой отступ для названия замка */
+}
     .cards{
       display:grid;
       grid-template-columns:1fr;
@@ -393,11 +406,11 @@
 		<div class="music-control"><button type="button" id="muteMusicBtn" class="ghost">Выключить музыку</button></div>
         <h1>Мы женимся!</h1>
         <p class="sub">
-          03/07/2026\n
-		  Замок Романовски (Langendorf)\n 
-		  Парковая улица, 5, пос. Сокольники,\n
-          Гвардейский муниципальный округ, Калининградская область
-        </p>
+		03/07/2026<br>
+		<b>Замок Романовски (Langendorf)</b><br>
+		Парковая улица, 5, пос. Сокольники,<br>
+		Гвардейский муниципальный округ, Калининградская область
+		</p>
 
         <div class="grid">
           <div class="cards">
