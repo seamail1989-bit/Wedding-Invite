@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="ru">
 <head>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Приглашение на свадьбу</title>
@@ -255,11 +256,39 @@
 	border-radius: var(--radius);
 	padding:40px;
 	box-shadow: 0 20px 60px rgba(0,0,0,.08);
+	color: #2c2c2c; /* Глубокий графитовый цвет, почти черный, но мягче */
+    font-family: 'Montserrat', sans-serif; /* Основной шрифт для всего блока */
 	
 	opacity: 0; 
 	transition: opacity 3.1s ease; /* Время появления тоже 3.1 секунды */
 	}
-
+	
+	/* Стилизуем заголовки внутри формы, чтобы они выглядели по-свадебному */
+	.invite-main h1, 
+	.invite-main h2, 
+	.invite-main h3,
+	.sectionTitle h2 {
+	font-family: 'Playfair Display', serif;
+	color: #1a1a1a; /* Еще чуть темнее для акцента */
+	font-weight: 700;
+	letter-spacing: 0; /* Для антиквы не нужно сильное сжатие */
+	}
+	
+	/* Исправляем цвет подписей и пояснений, которые были слишком светлыми */
+	.invite-main .sub,
+	.invite-main .card p,
+	.invite-main label,
+	.invite-main .hint,
+	.invite-main .sectionTitle span,
+	.invite-main .note {
+	color: #4a4a4a !important; /* Насыщенный серый, который легко читать */
+	}
+	
+	/* Делаем текст в карточках чуть выразительнее */
+	.invite-main .card {
+	background: rgba(0, 0, 0, 0.04); /* Легкая подложка вместо черной */
+	border: 1px solid rgba(0, 0, 0, 0.08);
+	}
     .envelope-screen--hidden{
       opacity:0;
       pointer-events:none;
