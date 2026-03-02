@@ -157,21 +157,23 @@
 	
     .invite-main .ghost {
       background: transparent;
-      border: 1px solid rgba(0, 0, 0, 0.15); /* Едва заметная рамка */
-      color: #000000;
-      opacity: 0.4;                          /* Делаем кнопку полупрозрачной */
+      /* Цвет текста и рамки теперь идентичен */
+      border: 1px solid rgba(0, 0, 0, 0.25); 
+      color: rgba(0, 0, 0, 0.25);
+      
+      opacity: 1; /* Убираем общую opacity, так как мы задали прозрачность напрямую цвету */
       font-weight: 500;
       padding: 6px 14px;
       border-radius: 999px;
-      font-size: 12px;                       /* Немного уменьшим размер */
+      font-size: 12px;
       transition: all 0.3s ease;
       cursor: pointer;
     }
 
-    /* При наведении кнопка становится четкой */
     .invite-main .ghost:hover {
-      opacity: 1;
-      border-color: rgba(0, 0, 0, 0.4);
+      /* При наведении делаем всё темнее и четче */
+      color: rgba(0, 0, 0, 0.8);
+      border-color: rgba(0, 0, 0, 0.8);
       background: rgba(0, 0, 0, 0.03);
     }
     .note{
