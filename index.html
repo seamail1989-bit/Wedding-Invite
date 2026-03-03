@@ -112,8 +112,12 @@
       color: #1a1a1a;
     }
     .sectionTitle{
-      display:flex; align-items:baseline; justify-content:space-between; gap:10px;
+      display:flex; 
+	  align-items:baseline; 
+	  justify-content:space-between; 
+	  gap:10px;
       margin:0 0 14px;
+	  margin-right: 20px;
     }
     .sectionTitle h2{margin:0; font-size:18px}
     .sectionTitle span{color:var(--muted); font-size:13px}
@@ -417,7 +421,7 @@
           <div class="cards">
             <div class="card">
               <h3>⏰ Время</h3>
-              <p>15:00 — сбор гостей (лучше не опаздывать, шампанское уже будет!)<br/><br/>15:40 — начало церемонии</p>
+              <p><br/>15:00 — сбор гостей (лучше не опаздывать, шампанское уже будет!)<br/><br/>15:40 — начало церемонии</p>
             </div>
             <div class="card">
               <h3>🎨 Дресс-код</h3>
@@ -437,19 +441,21 @@
             <span>* — обязательные</span>
           </div>
 
+			<div>
+              <label>Придёте ли на свадьбу? *</label>
+              <div class="checks">
+                <label class="check"><input type="radio" name="attendance_day1" value="Да" required> Да</label>
+                <label class="check"><input type="radio" name="attendance_day1" value="Нет" required> Нет</label>
+              </div>
+            </div>	
+
           <div class="row">
             <div>
               <label for="fio_main">Фамилия Имя Отчество *</label>
               <input id="fio_main" name="fio_main" type="text" required placeholder="ФИО" />
             </div>
 
-            <div>
-              <label>Придёте ли на свадьбу? *</label>
-              <div class="checks">
-                <label class="check"><input type="radio" name="attendance_day1" value="Да" required> Да</label>
-                <label class="check"><input type="radio" name="attendance_day1" value="Нет" required> Нет</label>
-              </div>
-            </div>
+            
           </div>
 
           <div class="divider"></div>
@@ -467,9 +473,33 @@
 				<button type="button" class="ghost" id="removeGuestBtn">— Убрать</button>
 			</div>
 			
-			<div class="hint">Можно добавить несколько гостей — все попадут в таблицу.</div>
+			<div class="hint">Можно добавить несколько гостей</div>
 			</div>
 
+			<div>
+              <label>Будут ли дети?</label>
+              <div class="checks">
+                <label class="check"><input type="radio" name="kids" value="Да" id="kidsYes"> Да</label>
+                <label class="check"><input type="radio" name="kids" value="Нет" id="kidsNo"> Нет</label>
+              </div>
+            </div>
+         
+
+			<div id="kidsBlock" style="display:none; margin-top:12px;">
+			<div class="row">
+				<div>
+				<label for="kids_count">Количество детей</label>
+				<input id="kids_count" name="kids_count" type="number" min="1" step="1" placeholder="1" value="1" />
+				<div class="hint">После ввода количества появятся отдельные поля для каждого ребёнка.</div>
+				</div>
+			</div>
+			
+			<!-- сюда будем динамически добавлять поля для детей -->
+			<div id="kidsList" style="margin-top:12px;"></div>
+			
+			<!-- сюда перед отправкой формы соберём всех детей строкой, чтобы в таблицу летело как раньше -->
+			<input id="kids_details" name="kids_details" type="hidden" value="" />
+			</div>
 
             <div>
               <label>Предпочтения по напиткам</label>
@@ -511,32 +541,7 @@
                 <label class="check"><input type="radio" name="attendance_day2" value="Нет"> Нет</label>
               </div>
             </div>
-
-            <div>
-              <label>Будут ли дети?</label>
-              <div class="checks">
-                <label class="check"><input type="radio" name="kids" value="Да" id="kidsYes"> Да</label>
-                <label class="check"><input type="radio" name="kids" value="Нет" id="kidsNo"> Нет</label>
-              </div>
-            </div>
-          </div>
-
-			<div id="kidsBlock" style="display:none; margin-top:12px;">
-			<div class="row">
-				<div>
-				<label for="kids_count">Количество детей</label>
-				<input id="kids_count" name="kids_count" type="number" min="1" step="1" placeholder="1" />
-				<div class="hint">После ввода количества появятся отдельные поля для каждого ребёнка.</div>
-				</div>
-			</div>
-			
-			<!-- сюда будем динамически добавлять поля для детей -->
-			<div id="kidsList" style="margin-top:12px;"></div>
-			
-			<!-- сюда перед отправкой формы соберём всех детей строкой, чтобы в таблицу летело как раньше -->
-			<input id="kids_details" name="kids_details" type="hidden" value="" />
-			</div>
-
+		</div>
           <div class="divider"></div>
 
           <div class="row">
@@ -590,10 +595,23 @@
   }
 
   function syncKidsVisibility() {
-    const show = kidsYes && kidsYes.checked;
-    if (kidsBlock) kidsBlock.style.display = show ? 'block' : 'none';
-    if (!show) clearKids();
-  }
+  const show = kidsYes && kidsYes.checked;
+  if (!kidsBlock) return;
+
+	if (show) {
+		kidsBlock.style.display = 'block';
+	
+		// если пусто — выставляем 1 по умолчанию
+		if (!kidsCountInput.value || Number(kidsCountInput.value) <= 0) {
+		kidsCountInput.value = '1';
+		}
+		// сразу строим поля для детей
+		rebuildKidsInputs();
+	} else {
+		kidsBlock.style.display = 'none';
+		clearKids();
+	}
+	}
 
   kidsYes?.addEventListener('change', syncKidsVisibility);
   kidsNo?.addEventListener('change', syncKidsVisibility);
@@ -608,7 +626,7 @@
     for (let i = 1; i <= n; i++) {
       const wrapper = document.createElement('div');
       wrapper.className = 'row';
-      wrapper.style.marginTop = i === 1 ? '0' : '10px';
+      wrapper.style.marginTop = i === 1 ? '0' : '32px';
 
       const col1 = document.createElement('div');
       const col2 = document.createElement('div');
