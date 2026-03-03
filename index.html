@@ -29,6 +29,28 @@
 	color:#3a3a3a;
 	}
 
+	.hero-header {
+	  display: flex;
+	  justify-content: space-between; /* Раскидывает элементы по разным сторонам */
+	  align-items: center;           /* Выравнивает их строго по одной горизонтальной линии */
+	  margin-bottom: 10px;           /* Отступ снизу до заголовка "Мы женимся" */
+	  }
+	  
+	  /* Убираем лишние отступы у старых контейнеров, чтобы не ломать центровку */
+	.music-control {
+	  margin-top: 0 !important; 
+	  }
+	  
+	  /* Делаем кнопку музыки круглой и аккуратной под размер бейджа */
+	  #muteMusicBtn {
+	  display: flex;
+	  align-items: center;
+	  justify-content: center;
+	  width: 40px;
+	  height: 40px;
+	  padding: 0;
+	  border-radius: 50%; /* Делает кнопку идеально круглой */
+	}
     .wrap{max-width:980px; margin:0 auto; padding:28px 18px 70px;}
     .hero{
       padding:26px;
@@ -405,10 +427,16 @@
 
     <!-- Основное содержимое (как было раньше), но внутри блока invite-main -->
     <div id="inviteMain" class="invite-main" style="display:none;">
-      <div class="hero">
-        <!-- тут начинается твой старый .hero-контент -->
-        <div class="badge">💌 Приглашение • 03/07/2026</div>
-		<div class="music-control"><button type="button" id="muteMusicBtn" class="ghost">Выключить музыку</button></div>
+	<div class="hero">
+		<div class="hero-header">
+		<div class="badge">💌 Приглашение • 03/07/2026</div>
+		<div class="music-control">
+			<button type="button" id="muteMusicBtn" class="ghost">
+			<span id="musicIcon">🎵</span>
+			</button>
+		</div>
+		</div>
+		
         <h1>Мы женимся!</h1>
         <p class="sub">
 		03/07/2026<br>
@@ -720,12 +748,19 @@
 
   const bgMusic = document.getElementById('bgMusic');
   const muteMusicBtn = document.getElementById('muteMusicBtn');
+  const musicIcon = document.getElementById('musicIcon');
   let isMusicPlaying = false;
 
-  function updateMusicButton() {
-    if (!muteMusicBtn) return;
-    muteMusicBtn.textContent = isMusicPlaying ? 'Выключить музыку' : 'Включить музыку';
-  }
+
+
+   function updateMusicButton() {
+   if (!muteMusicBtn || !musicIcon) return;
+   // Если музыка играет — показываем ноту, если выключена — перечеркнутую ноту или другой символ
+   musicIcon.textContent = isMusicPlaying ? '🎵' : '🔇'; 
+   
+   // Опционально: можно добавить легкую прозрачность кнопке, когда музыка выключена
+   muteMusicBtn.style.opacity = isMusicPlaying ? '1' : '0.6';
+   }
 
   function playMusic() {
     if (!bgMusic) return;
