@@ -176,89 +176,15 @@
     .hint{font-size:12px; color:var(--muted); margin-top:6px}
 
     .checks{display:flex; gap:12px; flex-wrap:wrap}
-	
-    /* --- Красивые свадебные переключатели --- */
-	.check{
-	position:relative;
-	display:inline-flex;
-	align-items:center;
-	justify-content:center;
-	padding:10px 18px;
-	border-radius:999px;
-	border:1px solid rgba(0,0,0,0.15);
-	background: #ffffff;
-	cursor:pointer;
-	transition: all .25s ease;
-	font-size:14px;
-	font-weight:500;
-	color:#444;
-	}
-	
-	/* Прячем стандартные radio/checkbox */
-	.check input{
-	position:absolute;
-	opacity:0;
-	pointer-events:none;
-	}
-	
-	/* Эффект при наведении */
-	.check:hover{
-	border-color:#b9a7ff;
-	box-shadow:0 4px 14px rgba(185,167,255,.25);
-	}
-	
-	/* Выбранное состояние */
-	.check input:checked + span{
-	color:#111;
-	}
-	
-	.check input:checked ~ span{
-	color:#111;
-	}
-	
-	.check input:checked + span,
-	.check input:checked ~ span{
-	font-weight:600;
-	}
-	
-	.check input:checked{
-	}
-	
-	.check input:checked + span::before{
-	}
-	
-	.check input:checked + span{
-	}
-	
-	.check input:checked{
-	}
-	
-	.check input:checked + span{
-	}
-	
-	.check input:checked{
-	}
-	
-	.check input:checked{
-	}
-	
-	/* Самое главное — фон выбранной кнопки */
-	.check input:checked + span{
-	}
-	
-	.check input:checked{
-	}
-	
-	.check input:checked{
-	}
-	
-	/* Меняем фон всего label, когда input выбран */
-	.check:has(input:checked){
-	background: linear-gradient(135deg, rgba(255,215,168,.9), rgba(185,167,255,.9));
-	border-color: transparent;
-	color:#111;
-	box-shadow:0 6px 18px rgba(0,0,0,.12);
-	}
+    .check{
+      display:flex; align-items:center; gap:10px;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+      user-select:none;
+    }
+    .check input{transform:scale(1.1)}
     .divider{height:1px; background:rgba(255,255,255,.10); margin:14px 0}
 
     .btns{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
@@ -546,14 +472,8 @@
 			<div>
               <label>Придёте ли на свадьбу? *</label>
               <div class="checks">
-				<label class="check">
-				<input type="radio" name="attendance_day1" value="Да" required>
-				<span>Да</span>
-				</label>
-				<label class="check">
-				<input type="radio" name="attendance_day1" value="Нет" required>
-				<span>Нет</span>
-				</label>
+                <label class="check"><input type="radio" name="attendance_day1" value="Да" required> Да</label>
+                <label class="check"><input type="radio" name="attendance_day1" value="Нет" required> Нет</label>
               </div>
             </div>	
 
@@ -587,14 +507,8 @@
 			<div>
               <label>Будут ли дети?</label>
               <div class="checks">
-				<label class="check">
-				<input type="radio" name="kids" value="Да" id="kidsYes">
-				<span>Да</span>
-				</label>
-				<label class="check">
-				<input type="radio" name="kids" value="Нет" id="kidsNo">
-				<span>Нет</span>
-				</label>
+                <label class="check"><input type="radio" name="kids" value="Да" id="kidsYes"> Да</label>
+                <label class="check"><input type="radio" name="kids" value="Нет" id="kidsNo"> Нет</label>
               </div>
             </div>
          
@@ -618,18 +532,9 @@
             <div>
               <label>Предпочтения по напиткам</label>
               <div class="checks">
-                <label class="check">
-				<input type="checkbox" name="drink_vodka" value="on">
-				<span>Водка</span>
-				</label>
-				<label class="check">
-				<input type="checkbox" name="drink_rum" value="on">
-				<span>Ром</span>
-				</label>
-				<label class="check">
-				<input type="checkbox" name="drink_wine" value="on">
-				<span>Вино</span>
-				</label>
+                <label class="check"><input type="checkbox" name="drink_vodka" value="on"> Водка</label>
+                <label class="check"><input type="checkbox" name="drink_rum" value="on"> Ром</label>
+                <label class="check"><input type="checkbox" name="drink_wine" value="on"> Вино</label>
               </div>
             </div>
           </div>
@@ -640,28 +545,16 @@
             <div>
               <label>Нужен ли Вам трансфер до места проведения мероприятия?</label>
               <div class="checks">
-				<label class="check">
-				<input type="radio" name="transfer_to" value="Да" required>
-				<span>Да</span>
-				</label>
-				<label class="check">
-				<input type="radio" name="transfer_to" value="Нет" required>
-				<span>Нет</span>
-				</label>
+                <label class="check"><input type="radio" name="transfer_to" value="Да"> Да</label>
+                <label class="check"><input type="radio" name="transfer_to" value="Нет"> Нет</label>
               </div>
             </div>
 
             <div>
               <label>Нужен ли Вам трансфер обратно с места мероприятия?</label>
               <div class="checks">
-				<label class="check">
-				<input type="radio" name="transfer_back" value="Да" required>
-				<span>Да</span>
-				</label>
-				<label class="check">
-				<input type="radio" name="transfer_back" value="Нет" required>
-				<span>Нет</span>
-				</label>
+                <label class="check"><input type="radio" name="transfer_back" value="Да"> Да</label>
+                <label class="check"><input type="radio" name="transfer_back" value="Нет"> Нет</label>
               </div>
             </div>
           </div>
@@ -670,16 +563,10 @@
 
           <div class="row">
             <div>
-              <label>Придёте ли на второй день? (отдых за городом на природе)</label>
+              <label>Придёте ли на второй день?</label>
               <div class="checks">
-				<label class="check">
-				<input type="radio" name="attendance_day2" value="Да" required>
-				<span>Да</span>
-				</label>
-				<label class="check">
-				<input type="radio" name="attendance_day2" value="Нет" required>
-				<span>Нет</span>
-				</label>
+                <label class="check"><input type="radio" name="attendance_day2" value="Да"> Да</label>
+                <label class="check"><input type="radio" name="attendance_day2" value="Нет"> Нет</label>
               </div>
             </div>
 		</div>
