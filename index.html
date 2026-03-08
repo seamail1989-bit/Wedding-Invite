@@ -549,12 +549,12 @@
         <!-- ВАЖНО: action = твой Apps Script URL -->
         <form method="POST" action="https://script.google.com/macros/s/AKfycbxZVP4LAC2XiACfTVvhtwIciuyEL0qGcQvun0VC1E35VAmcr3IiqloGwztDuwLk-SbM6Q/exec">
           <div class="sectionTitle">
-            <h2>Форма гостя</h2>
+            <h2><br><br>Форма гостя</h2>
             <span>* — обязательные поля<br></span>
           </div>
 
 			<div>
-              <label><br>Придёте ли на свадьбу? *</label>
+              <label><br><br>Придёте ли на свадьбу? *</label>
               <div class="checks">
 				<label class="check">
 				<input type="radio" name="attendance_day1" value="Да" required>
@@ -569,7 +569,7 @@
 
           <div class="row">
             <div>
-              <label for="fio_main">Фамилия Имя Отчество *</label>
+              <label for="fio_main"><br><br>Фамилия Имя Отчество *</label>
               <input id="fio_main" name="fio_main" type="text" required placeholder="ФИО" />
             </div>
 
@@ -580,7 +580,7 @@
 
           <div class="row">
 			<div>
-			<label>Гости (добавьте, если придёте не одни)</label>
+			<label>Гости (добавьте, если придёте с кем-то)</label>
 			
 			<div id="plusOnes">
 				<input name="fio_plus1" type="text" placeholder="Гость 2 — ФИО" />
@@ -595,7 +595,7 @@
 			</div>
 
 			<div>
-              <label>Будут ли дети?</label>
+              <label><br><br>Будут ли дети?</label>
               <div class="checks">
 				<label class="check">
 				<input type="radio" name="kids" value="Да" id="kidsYes">
@@ -626,19 +626,23 @@
 			</div>
 
             <div>
-              <label>Предпочтения по напиткам</label>
+              <label><br><br>Предпочтения по напиткам</label>
               <div class="checks">
                 <label class="check">
-				<input type="checkbox" name="drink_vodka" value="on">
+				<input type="checkbox" id="drinkVodka" name="drink_vodka" value="on">
 				<span>Водка</span>
 				</label>
 				<label class="check">
-				<input type="checkbox" name="drink_rum" value="on">
+				<input type="checkbox" id="drinkRum" name="drink_rum" value="on">
 				<span>Ром</span>
 				</label>
 				<label class="check">
-				<input type="checkbox" name="drink_wine" value="on">
+				<input type="checkbox" id="drinkWine" name="drink_wine" value="on">
 				<span>Вино</span>
+				</label>
+				<label class="check">
+				<input type="checkbox" id="drinkJuice" name="drink_juice" value="on">
+				<span>Сок (Без алкоголя)</span>
 				</label>
               </div>
             </div>
@@ -919,6 +923,47 @@
     } else {
       playMusic();
     }
+  });
+  
+  // --- Логика напитков (Сок vs алкоголь) ---
+
+  const drinkVodka = document.getElementById('drinkVodka');
+  const drinkRum = document.getElementById('drinkRum');
+  const drinkWine = document.getElementById('drinkWine');
+  const drinkJuice = document.getElementById('drinkJuice');
+  
+  function uncheckAlcohol() {
+  if (drinkVodka) drinkVodka.checked = false;
+  if (drinkRum) drinkRum.checked = false;
+  if (drinkWine) drinkWine.checked = false;
+  }
+  
+  function uncheckJuice() {
+  if (drinkJuice) drinkJuice.checked = false;
+  }
+  
+  drinkJuice?.addEventListener('change', () => {
+  if (drinkJuice.checked) {
+	  uncheckAlcohol();
+  }
+  });
+  
+  drinkVodka?.addEventListener('change', () => {
+  if (drinkVodka.checked) {
+	  uncheckJuice();
+  }
+  });
+  
+  drinkRum?.addEventListener('change', () => {
+  if (drinkRum.checked) {
+	  uncheckJuice();
+  }
+  });
+  
+  drinkWine?.addEventListener('change', () => {
+  if (drinkWine.checked) {
+	  uncheckJuice();
+  }
   });
 
   // --- ОТКРЫТИЕ КОНВЕРТА ---
