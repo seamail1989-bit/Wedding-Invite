@@ -134,7 +134,7 @@
       color: #1a1a1a;
     }
 	
-	// Обязаетельные поля
+	// Обязаетельные поля надпись
     .sectionTitle{
       display:flex; 
 	  align-items:baseline; 
@@ -525,7 +525,7 @@
           <div class="cards">
             <div class="card">
               <h3>⏰ Время</h3>
-              <p>15:00 — сбор гостей (лучше не опаздывать, шампанское уже будет!)<br/><br/>15:40 — начало церемонии</p>
+              <p>15:00 — сбор гостей (лучше не опаздывать, шампанское уже будет!)<br/>15:40 — начало церемонии</p>
             </div>
             <div class="card">
               <h3>🎨 Дресс-код</h3>
@@ -542,7 +542,7 @@
         <form method="POST" action="https://script.google.com/macros/s/AKfycbxZVP4LAC2XiACfTVvhtwIciuyEL0qGcQvun0VC1E35VAmcr3IiqloGwztDuwLk-SbM6Q/exec">
           <div class="sectionTitle">
             <h2>Форма гостя</h2>
-            <span>* — обязательные</span>
+            <span>* — обязательные поля</span><br/>
           </div>
 
 			<div>
@@ -775,7 +775,7 @@
       const col2 = document.createElement('div');
 
       const labelName = document.createElement('label');
-      labelName.textContent = `Ребёнок ${i} — ФИ`;
+      labelName.textContent = `Ребёнок ${i} — Ф.И.`;
       const inputName = document.createElement('input');
       inputName.type = 'text';
       inputName.name = `kid_name_${i}`;
